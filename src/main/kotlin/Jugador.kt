@@ -1,12 +1,10 @@
-class Jugador {
+class Jugador(var nombre : String = "",
+              var partidasJugadas : Int = 0,
+              var tiempoJugado : Int = 0,
+              var kills : Int = 0,
+              var deaths : Int = 0) {
 
-    var nombre = ""
-    var partidasJugadas = 0
-    var tiempoJugado = 0
-    var kills = 0
-    var deaths = 0
-
-    fun getKD(): Double {
+    private fun getKD(): Double {
         return kills.toDouble() / deaths.toDouble()
     }
 
