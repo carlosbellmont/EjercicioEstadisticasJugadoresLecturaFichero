@@ -1,3 +1,5 @@
+import java.io.File
+
 class Jugador(var nombre : String = "",
               var partidasJugadas : Int = 0,
               var tiempoJugado : Int = 0,
@@ -10,5 +12,26 @@ class Jugador(var nombre : String = "",
 
     fun getDetalles(): String {
         return "El jugador $nombre lleva $partidasJugadas partidas jugadas en $tiempoJugado horas jugadas, con un resultado de $kills bajas por $deaths muertes. Por tanto el K/D es de ${getKD()}"
+    }
+
+    fun guardarJugador(){
+        val archivo = File("Jugadores/$nombre.txt")
+        archivo.writeText("${partidasJugadas}\n")
+        archivo.appendText("${tiempoJugado}\n")
+        archivo.appendText("${kills}\n")
+        archivo.appendText("${deaths}\n")
+    }
+
+    fun cargarJugador(){
+        try {
+            val archivo = File("Jugadores/$nombre.txt")
+            val lineas = archivo.readLines()
+            partidasJugadas = lineas[0].toInt()
+            tiempoJugado = lineas[1].toInt()
+            kills = lineas[2].toInt()
+            deaths = lineas[3].toInt()
+        } catch (exception : Exception) {
+            println("Error la leer los datos.")
+        }
     }
 }
